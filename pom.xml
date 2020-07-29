@@ -15,8 +15,8 @@
     <description>Convert clusters in spreasdsheet to ARRF</description>
 
     <scm>
-        <connection>scm:git:git://github.com/henriquemoreno1981/xls2arrf.git</connection>
-        <developerConnection>scm:git:git://github.com/henriquemoreno1981/xls2arrf.git</developerConnection>
+        <connection>scm:git:ssh://git@github.com/henriquemoreno1981/xls2arrf.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/henriquemoreno1981/xls2arrf.git</developerConnection>
         <url>https://github.com/henriquemoreno1981/xls2arrf</url>
     </scm>
     <properties>
