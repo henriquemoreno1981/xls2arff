@@ -9,7 +9,7 @@
     </parent>
     <groupId>org.projectomandacaru</groupId>
     <artifactId>xls2arrf</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>xls2arrf</name>
     <description>Convert clusters in spreasdsheet to ARRF</description>
 
@@ -17,7 +17,7 @@
         <connection>scm:git:ssh://git@github.com/henriquemoreno1981/xls2arrf.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/henriquemoreno1981/xls2arrf.git</developerConnection>
         <url>https://github.com/henriquemoreno1981/xls2arrf</url>
-      <tag>xls2arrf-1.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
     <properties>
         <java.version>1.8</java.version>
