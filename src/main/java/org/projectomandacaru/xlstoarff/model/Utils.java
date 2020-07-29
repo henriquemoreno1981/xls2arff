@@ -5,7 +5,11 @@ import java.io.IOException;
 
 public class Utils {
     public static String getPath(File file) throws IOException {
-        return file.getParentFile().getCanonicalPath();
+        if (file.isFile()) {
+            return file.getParentFile().getCanonicalPath();
+        } else {
+            return file.getCanonicalPath();
+        }
     }
 
     public static String getPath(String filename) throws IOException {

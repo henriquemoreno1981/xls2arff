@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class XslToCsv implements XslToCsvInterface {
+public class XslToCsv implements SpreadSheetToCsv {
     Logger logger = LoggerFactory.getLogger(XslToCsv.class);
 
     private String convertExcelToCSV(Sheet sheet, String sheetName, String path) {
@@ -44,10 +44,6 @@ public class XslToCsv implements XslToCsvInterface {
                             break;
                         case STRING:
                             String val = CsvNomalize.normalize(cell.getStringCellValue());
-                            /*if (!firstRow) {
-                                val = "\"" + val + "\"";
-
-                            }*/
                             data.append(val);
                             break;
                         case BLANK:
@@ -57,7 +53,7 @@ public class XslToCsv implements XslToCsvInterface {
                     }
                     firstCell = false;
                 }
-                data.append(XslToCsvInterface.BREAK_LINE);
+                data.append(SpreadSheetToCsv.BREAK_LINE);
             }
             resultPath = path + File.separatorChar + sheetName + ".csv";
             Files.write(Paths.get(resultPath),
@@ -81,13 +77,13 @@ public class XslToCsv implements XslToCsvInterface {
             for (int i = 0; i < wb.getNumberOfSheets(); i++) {
                 String sheetName = wb.getSheetAt(i).getSheetName();
                 if (sheetName.startsWith("Cluster")) {
-                    logger.info("Gerando arquivo CSV: '" + sheetName + ".csv'");
+                    logger.info(String.format("Gerando arquivo CSV: '%s.csv'", sheetName));
                     this.convertExcelToCSV(wb.getSheetAt(i), wb.getSheetAt(i).getSheetName(), outputPath);
                     files.add(outputPath + File.separatorChar + sheetName + ".csv");
                 }
             }
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            logger.error(ex.getMessage(), ex);
         }
         return files.toArray(new String[]{});
     }
