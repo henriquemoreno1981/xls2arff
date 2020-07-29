@@ -1,4 +1,4 @@
-package org.projectomandacaru.xlstoarff.model;
+package org.projectomandacaru.xls2arff.model;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package org.projectomandacaru.xlstoarff;
+package org.projectomandacaru.xls2arff;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

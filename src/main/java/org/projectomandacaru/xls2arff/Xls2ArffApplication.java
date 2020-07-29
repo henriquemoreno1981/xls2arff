@@ -1,10 +1,10 @@
-package org.projectomandacaru.xlstoarff;
+package org.projectomandacaru.xls2arff;
 
 import org.apache.commons.io.FilenameUtils;
-import org.projectomandacaru.xlstoarff.model.CsvToArff;
-import org.projectomandacaru.xlstoarff.model.SpreadSheetToCsv;
-import org.projectomandacaru.xlstoarff.model.Utils;
-import org.projectomandacaru.xlstoarff.utils.SpreadSheetToCsvFactory;
+import org.projectomandacaru.xls2arff.model.CsvToArff;
+import org.projectomandacaru.xls2arff.model.SpreadSheetToCsv;
+import org.projectomandacaru.xls2arff.model.Utils;
+import org.projectomandacaru.xls2arff.utils.SpreadSheetToCsvFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

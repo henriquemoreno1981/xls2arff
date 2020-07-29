@@ -1,10 +1,9 @@
-package org.projectomandacaru.xlstoarff.utils;
+package org.projectomandacaru.xls2arff.utils;
 
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CsvNomalizeTest {
     @Test

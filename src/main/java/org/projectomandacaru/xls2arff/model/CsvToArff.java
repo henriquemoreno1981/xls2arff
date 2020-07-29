@@ -1,6 +1,5 @@
-package org.projectomandacaru.xlstoarff.model;
+package org.projectomandacaru.xls2arff.model;
 
-import org.apache.commons.io.FilenameUtils;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
 import weka.core.converters.CSVLoader;

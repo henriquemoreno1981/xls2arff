@@ -1,4 +1,4 @@
-package org.projectomandacaru.xlstoarff.utils;
+package org.projectomandacaru.xls2arff.utils;
 
 import java.text.Normalizer;
 import java.util.regex.Pattern;

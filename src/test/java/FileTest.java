@@ -1,8 +1,7 @@
 import org.junit.jupiter.api.Test;
-import org.projectomandacaru.xlstoarff.model.Utils;
+import org.projectomandacaru.xls2arff.model.Utils;
 
 import java.io.File;
-import java.lang.reflect.Field;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.StringContains.containsString;
