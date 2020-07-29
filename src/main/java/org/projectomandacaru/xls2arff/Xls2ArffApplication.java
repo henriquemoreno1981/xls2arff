@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import weka.core.AbstractInstance;
 
 import java.io.File;
@@ -23,7 +24,8 @@ public class Xls2ArffApplication implements CommandLineRunner {
     private Logger logger = LoggerFactory.getLogger(Xls2ArffApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(Xls2ArffApplication.class, args);
+        SpringApplicationBuilder builder = new SpringApplicationBuilder(Xls2ArffApplication.class);
+        builder.headless(false).run(args);
     }
 
     @Override
