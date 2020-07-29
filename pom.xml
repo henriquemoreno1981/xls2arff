@@ -11,7 +11,7 @@
     <groupId>org.projectomandacaru</groupId>
     <artifactId>xls2arrf</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>xls2arff</name>
+    <name>xls2arrf</name>
     <description>Convert clusters in spreasdsheet to ARRF</description>
 
     <properties>
@@ -106,7 +106,7 @@
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
-                                        <Main-Class>com.text.dashboard.hello.Application</Main-Class>
+                                        <Main-Class>org.projectomandacaru.xls2arff.Xls2ArffApplication</Main-Class>
                                     </manifestEntries>
                                 </transformer>
                             </transformers>
