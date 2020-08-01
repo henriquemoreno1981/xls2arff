@@ -6,5 +6,5 @@ public interface SpreadSheetToCsv {
     String SEPARATOR = ",";
     String BREAK_LINE = "\r\n";
 
-    String[] readFileToCsv(String filename, String outputPath) throws IOException;
+    String[] readFileToCsv(String filename, String outputPath, String[] sheetNames) throws IOException;
 }

@@ -67,7 +67,7 @@ public class XslToCsv implements SpreadSheetToCsv {
     }
 
     @Override
-    public String[] readFileToCsv(String filename, String outputPath) throws IOException {
+    public String[] readFileToCsv(String filename, String outputPath, String[] sheetNames) throws IOException {
         InputStream inp = null;
         List<String> files = new ArrayList<>();
         try {
@@ -76,7 +76,15 @@ public class XslToCsv implements SpreadSheetToCsv {
 
             for (int i = 0; i < wb.getNumberOfSheets(); i++) {
                 String sheetName = wb.getSheetAt(i).getSheetName();
-                if (sheetName.startsWith("Cluster")) {
+                boolean hasSheet = false;
+                if (sheetNames != null && sheetName.length() > 0) {
+                    for (String name : sheetNames) {
+                        if ( sheetName.equalsIgnoreCase(name)) {
+                            hasSheet = true;
+                        }
+                    }
+                }
+                if (hasSheet) {
                     logger.info(String.format("Gerando arquivo CSV: '%s.csv'", sheetName));
                     this.convertExcelToCSV(wb.getSheetAt(i), wb.getSheetAt(i).getSheetName(), outputPath);
                     files.add(outputPath + File.separatorChar + sheetName + ".csv");

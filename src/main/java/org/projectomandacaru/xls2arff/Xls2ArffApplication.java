@@ -3,8 +3,8 @@ package org.projectomandacaru.xls2arff;
 import org.apache.commons.io.FilenameUtils;
 import org.projectomandacaru.xls2arff.model.CsvToArff;
 import org.projectomandacaru.xls2arff.model.SpreadSheetToCsv;
-import org.projectomandacaru.xls2arff.utils.Utils;
 import org.projectomandacaru.xls2arff.utils.SpreadSheetToCsvFactory;
+import org.projectomandacaru.xls2arff.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -30,18 +30,12 @@ public class Xls2ArffApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (args.length > 0) {
-            StringBuilder nomeArquivo = new StringBuilder();
-            for (int x = 0; x < args.length; x++) {
-                if (x > 0) {
-                    nomeArquivo.append(" ");
-                }
-                nomeArquivo.append(args[x]);
-            }
-            if (new File(nomeArquivo.toString()).exists()) {
-                logger.info(String.format("Abrindo: '%s'", nomeArquivo.toString()));
-                SpreadSheetToCsv spreadSheetToCsv = SpreadSheetToCsvFactory.factory(nomeArquivo.toString());
-                String[] files = spreadSheetToCsv.readFileToCsv(nomeArquivo.toString(), Utils.getPath(nomeArquivo.toString()));
-                for (String clusterName: files) {
+            String nomeArquivo = getFileName(args);
+            if (new File(nomeArquivo).exists()) {
+                logger.info(String.format("Abrindo: '%s'", nomeArquivo));
+                SpreadSheetToCsv spreadSheetToCsv = SpreadSheetToCsvFactory.factory(nomeArquivo);
+                String[] files = spreadSheetToCsv.readFileToCsv(nomeArquivo, Utils.getPath(nomeArquivo), new String[]{"Cluster1", "Cluster2", "Cluster3"});
+                for (String clusterName : files) {
                     File csvFile = new File(clusterName);
                     logger.info(String.format("Gerando arff a partir do '%s'", csvFile.getName()));
                     if (csvFile.exists()) {
@@ -52,8 +46,19 @@ public class Xls2ArffApplication implements CommandLineRunner {
                     }
                 }
             } else {
-                logger.error(String.format("Arquivo '%s' não existe", nomeArquivo.toString()));
+                logger.error(String.format("Arquivo '%s' não existe", nomeArquivo));
             }
         }
+    }
+
+    private String getFileName(String[] args) {
+        StringBuilder nomeArquivo = new StringBuilder();
+        for (int x = 0; x < args.length; x++) {
+            if (x > 0) {
+                nomeArquivo.append(" ");
+            }
+            nomeArquivo.append(args[x]);
+        }
+        return nomeArquivo.toString();
     }
 }
