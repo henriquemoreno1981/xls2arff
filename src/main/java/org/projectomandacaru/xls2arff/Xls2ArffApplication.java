@@ -23,6 +23,8 @@ public class Xls2ArffApplication implements CommandLineRunner {
     public static final String BUFFER = "5000";
     public static final int DEC = AbstractInstance.s_numericAfterDecimalPoint;
 
+    private boolean processando = false;
+
     private Logger logger = LoggerFactory.getLogger(Xls2ArffApplication.class);
 
     public static void main(String[] args) {
@@ -54,11 +56,10 @@ public class Xls2ArffApplication implements CommandLineRunner {
                     frame.pack();
                     frame.setSize(600, 600);
                     frame.setVisible(true);
-                    transform(jFileChooser.getSelectedFile().getAbsolutePath(), log);
                     frame.addWindowListener(new java.awt.event.WindowAdapter() {
                         @Override
                         public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                            if (JOptionPane.showConfirmDialog(frame,
+                            if (!processando || JOptionPane.showConfirmDialog(frame,
                                     "Fechando essa janela vai interromper o processamento?", "Fechar Janela?",
                                     JOptionPane.YES_NO_OPTION,
                                     JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
@@ -66,6 +67,9 @@ public class Xls2ArffApplication implements CommandLineRunner {
                             }
                         }
                     });
+                    processando = true;
+                    transform(jFileChooser.getSelectedFile().getAbsolutePath(), log);
+                    processando = false;
                     break;
                 default:
                     JOptionPane.showMessageDialog(new JFrame(), "Sem arquivos", "Nenhum arquivo selecionado.", JOptionPane.WARNING_MESSAGE);
@@ -82,11 +86,16 @@ public class Xls2ArffApplication implements CommandLineRunner {
         logger.info(str);
     }
 
-    private void transform(String nomeArquivo, JTextArea log) throws IOException {
-
+    private void transform(String nomeArquivo, JTextArea log) {
         writeLog(log, String.format("Abrindo: '%s'", nomeArquivo));
         SpreadSheetToCsv spreadSheetToCsv = SpreadSheetToCsvFactory.factory(nomeArquivo);
-        String[] files = spreadSheetToCsv.readFileToCsv(nomeArquivo, Utils.getPath(nomeArquivo), new String[]{"Cluster1", "Cluster2", "Cluster3"});
+        String[] files = null;
+        try {
+             files = spreadSheetToCsv.readFileToCsv(nomeArquivo, Utils.getPath(nomeArquivo), new String[]{"Cluster1", "Cluster2", "Cluster3"});
+        } catch ( IOException e) {
+            writeLog(log, String.format("Não foi possivel encontrar '%s'", nomeArquivo));
+            return;
+        }
         for (String clusterName : files) {
             File csvFile = new File(clusterName);
             writeLog(log, String.format("Gerando arff a partir do '%s'", csvFile.getAbsolutePath()));
