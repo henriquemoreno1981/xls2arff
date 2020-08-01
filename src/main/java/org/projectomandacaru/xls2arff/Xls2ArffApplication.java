@@ -12,7 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import weka.core.AbstractInstance;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
+import java.io.IOException;
 
 @SpringBootApplication
 public class Xls2ArffApplication implements CommandLineRunner {
@@ -32,23 +35,75 @@ public class Xls2ArffApplication implements CommandLineRunner {
         if (args.length > 0) {
             String nomeArquivo = getFileName(args);
             if (new File(nomeArquivo).exists()) {
-                logger.info(String.format("Abrindo: '%s'", nomeArquivo));
-                SpreadSheetToCsv spreadSheetToCsv = SpreadSheetToCsvFactory.factory(nomeArquivo);
-                String[] files = spreadSheetToCsv.readFileToCsv(nomeArquivo, Utils.getPath(nomeArquivo), new String[]{"Cluster1", "Cluster2", "Cluster3"});
-                for (String clusterName : files) {
-                    File csvFile = new File(clusterName);
-                    logger.info(String.format("Gerando arff a partir do '%s'", csvFile.getName()));
-                    if (csvFile.exists()) {
-                        CsvToArff.convert(clusterName, FilenameUtils.removeExtension(clusterName) + ".arff");
-                        csvFile.delete();
-                    } else {
-                        logger.error(String.format("Arquivo '%s' não existe", csvFile.getName()));
-                    }
-                }
+                transform(nomeArquivo, null);
             } else {
                 logger.error(String.format("Arquivo '%s' não existe", nomeArquivo));
             }
+        } else {
+            JFileChooser jFileChooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel","xls", "xlsx");
+            jFileChooser.setFileFilter(filter);
+            int returnVal = jFileChooser.showOpenDialog(new JFrame());
+            switch (returnVal) {
+                case JFileChooser.APPROVE_OPTION:
+                    final JFrame frame = new JFrame("LOG");
+                    JTextArea log = new JTextArea();
+                    log.setLineWrap(true);
+                    log.setEditable(false);
+                    frame.add(log);
+                    frame.pack();
+                    frame.setSize(600, 600);
+                    frame.setVisible(true);
+                    transform(jFileChooser.getSelectedFile().getAbsolutePath(), log);
+                    frame.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                            if (JOptionPane.showConfirmDialog(frame,
+                                    "Fechando essa janela vai interromper o processamento?", "Fechar Janela?",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+                                System.exit(0);
+                            }
+                        }
+                    });
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(new JFrame(), "Sem arquivos", "Nenhum arquivo selecionado.", JOptionPane.WARNING_MESSAGE);
+                    break;
+            }
         }
+    }
+
+    private void writeLog(JTextArea log, String str) {
+        if (log != null) {
+            log.append(str + "\r\n");
+            log.update(log.getGraphics());
+        }
+        logger.info(str);
+    }
+
+    private void transform(String nomeArquivo, JTextArea log) throws IOException {
+
+        writeLog(log, String.format("Abrindo: '%s'", nomeArquivo));
+        SpreadSheetToCsv spreadSheetToCsv = SpreadSheetToCsvFactory.factory(nomeArquivo);
+        String[] files = spreadSheetToCsv.readFileToCsv(nomeArquivo, Utils.getPath(nomeArquivo), new String[]{"Cluster1", "Cluster2", "Cluster3"});
+        for (String clusterName : files) {
+            File csvFile = new File(clusterName);
+            writeLog(log, String.format("Gerando arff a partir do '%s'", csvFile.getAbsolutePath()));
+            if (csvFile.exists()) {
+                try {
+                    String arrfFilename = FilenameUtils.removeExtension(clusterName) + ".arff";
+                    CsvToArff.convert(clusterName, arrfFilename);
+                    writeLog(log, String.format("Arquivo arrf gerado '%s'", arrfFilename));
+                    csvFile.delete();
+                } catch (IOException e) {
+                    writeLog(log, "Ocorreu o seguinte erro: " + e.getMessage());
+                }
+            } else {
+                writeLog(log, String.format("Arquivo '%s' não existe", csvFile.getAbsoluteFile()));
+            }
+        }
+        writeLog(log, "Fim!!!");
     }
 
     private String getFileName(String[] args) {

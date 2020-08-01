@@ -7,9 +7,8 @@ public class Utils {
     public static String getPath(File file) throws IOException {
         if (file.isFile()) {
             String absolutePath = "";
-            if ( file.getParentFile() == null ) {
-                absolutePath = file.getAbsolutePath();
-                absolutePath = absolutePath.substring(absolutePath.lastIndexOf(File.separatorChar));
+            if (file.getParentFile() == null) {
+                absolutePath = getAbsolutePath(file.getAbsolutePath(), File.separatorChar);
             } else {
                 absolutePath = file.getParentFile().getCanonicalPath();
             }
@@ -17,6 +16,10 @@ public class Utils {
         } else {
             return file.getCanonicalPath();
         }
+    }
+
+    public static String getAbsolutePath(String absolutePath, char separatorChar) {
+        return absolutePath.substring(0, absolutePath.lastIndexOf(separatorChar));
     }
 
     public static String getPath(String filename) throws IOException {
