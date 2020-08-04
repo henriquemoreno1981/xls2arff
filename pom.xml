@@ -14,9 +14,8 @@
     <description>Convert clusters in spreasdsheet to ARFF</description>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com/henriquemoreno1981/xls2arrf.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/henriquemoreno1981/xls2arrf.git</developerConnection>
-        <url>https://github.com/henriquemoreno1981/xls2arrf</url>
+        <developerConnection>scm:git:ssh://git@github.com/henriquemoreno1981/xls2arff.git</developerConnection>
+        <url>https://github.com/henriquemoreno1981/xls2arff</url>
       <tag>HEAD</tag>
   </scm>
     <properties>
@@ -119,13 +118,6 @@
                             – the `releases` profile – to become active during the Release process. -->
                         <releaseProfiles>releases</releaseProfiles>
                     </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-scm-plugin</artifactId>
-                            <version>1.8.1</version>
-                        </dependency>
-                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
