@@ -1,7 +1,7 @@
-package org.projectomandacaru.xls2arff.model;
+package org.projectomandacaru.xls2arrf.model;
 
 import org.apache.poi.ss.usermodel.*;
-import org.projectomandacaru.xls2arff.utils.CsvNomalize;
+import org.projectomandacaru.xls2arrf.utils.CsvNomalize;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import weka.core.AbstractInstance;
@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class XslToCsv implements SpreadSheetToCsv {
-    Logger logger = LoggerFactory.getLogger(XslToCsv.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(XslToCsv.class);
 
     private String convertExcelToCSV(Sheet sheet, String sheetName, String path) {
         String resultPath = null;
@@ -59,9 +59,9 @@ public class XslToCsv implements SpreadSheetToCsv {
             Files.write(Paths.get(resultPath),
                     data.toString().getBytes("UTF-8"));
         } catch (FileNotFoundException e) {
-            logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         } catch (IOException e) {
-            logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         }
         return resultPath;
     }
@@ -85,13 +85,13 @@ public class XslToCsv implements SpreadSheetToCsv {
                     }
                 }
                 if (hasSheet) {
-                    logger.info(String.format("Gerando arquivo CSV: '%s.csv'", sheetName));
+                    LOGGER.info(String.format("Gerando arquivo CSV: '%s.csv'", sheetName));
                     this.convertExcelToCSV(wb.getSheetAt(i), wb.getSheetAt(i).getSheetName(), outputPath);
                     files.add(outputPath + File.separatorChar + sheetName + ".csv");
                 }
             }
         } catch (Exception ex) {
-            logger.error(ex.getMessage(), ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
         return files.toArray(new String[]{});
     }

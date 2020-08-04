@@ -1,4 +1,4 @@
-package org.projectomandacaru.xls2arff.utils;
+package org.projectomandacaru.xls2arrf.utils;
 
 import org.junit.jupiter.api.Test;
 

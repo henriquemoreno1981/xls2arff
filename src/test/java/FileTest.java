@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import org.projectomandacaru.xls2arff.utils.Utils;
+import org.projectomandacaru.xls2arrf.utils.Utils;
 
 import java.io.File;
 
