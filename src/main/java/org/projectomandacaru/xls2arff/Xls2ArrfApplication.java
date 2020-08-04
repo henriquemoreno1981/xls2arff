@@ -1,11 +1,11 @@
-package org.projectomandacaru.xls2arrf;
+package org.projectomandacaru.xls2arff;
 
 import org.apache.commons.io.FilenameUtils;
-import org.projectomandacaru.xls2arrf.model.CsvToArff;
-import org.projectomandacaru.xls2arrf.model.SpreadSheetToCsv;
-import org.projectomandacaru.xls2arrf.utils.SpreadSheetToCsvFactory;
-import org.projectomandacaru.xls2arrf.utils.Utils;
-import org.projectomandacaru.xls2arrf.view.JLog;
+import org.projectomandacaru.xls2arff.model.CsvToArff;
+import org.projectomandacaru.xls2arff.model.SpreadSheetToCsv;
+import org.projectomandacaru.xls2arff.utils.SpreadSheetToCsvFactory;
+import org.projectomandacaru.xls2arff.utils.Utils;
+import org.projectomandacaru.xls2arff.view.JLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +20,7 @@ import java.io.IOException;
 @SpringBootApplication
 public class Xls2ArrfApplication implements CommandLineRunner {
 
-    public static final String ARRF_EXTENSION = "arrf";
+    public static final String ARFF_EXTENSION = "arff";
 
     private boolean processando = false;
 
@@ -86,12 +86,12 @@ public class Xls2ArrfApplication implements CommandLineRunner {
         }
         for (String clusterName : files) {
             File csvFile = new File(clusterName);
-            LOGGER.info(String.format("Gerando %1s a partir do '%2s'",ARRF_EXTENSION, csvFile.getAbsolutePath()));
+            LOGGER.info(String.format("Gerando %1s a partir do '%2s'", ARFF_EXTENSION, csvFile.getAbsolutePath()));
             if (csvFile.exists()) {
                 try {
-                    String arrfFilename = FilenameUtils.removeExtension(clusterName) + "." + ARRF_EXTENSION;
+                    String arrfFilename = FilenameUtils.removeExtension(clusterName) + "." + ARFF_EXTENSION;
                     CsvToArff.convert(clusterName, arrfFilename);
-                    LOGGER.info(String.format("Arquivo %1s gerado '%2s'", ARRF_EXTENSION, arrfFilename));
+                    LOGGER.info(String.format("Arquivo %1s gerado '%2s'", ARFF_EXTENSION, arrfFilename));
                     csvFile.delete();
                 } catch (IOException e) {
                     LOGGER.info("Ocorreu o seguinte erro: " + e.getMessage());

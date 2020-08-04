@@ -8,10 +8,10 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.projectomandacaru</groupId>
-    <artifactId>xls2arrf</artifactId>
+    <artifactId>xls2arff</artifactId>
     <version>1.0.2-SNAPSHOT</version>
-    <name>xls2arrf</name>
-    <description>Convert clusters in spreasdsheet to ARRF</description>
+    <name>xls2arff</name>
+    <description>Convert clusters in spreasdsheet to ARFF</description>
 
     <scm>
         <connection>scm:git:ssh://git@github.com/henriquemoreno1981/xls2arrf.git</connection>

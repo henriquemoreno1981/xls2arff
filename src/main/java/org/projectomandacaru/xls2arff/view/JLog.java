@@ -1,6 +1,6 @@
-package org.projectomandacaru.xls2arrf.view;
+package org.projectomandacaru.xls2arff.view;
 
-import org.projectomandacaru.xls2arrf.view.utils.TextAreaOutputStream;
+import org.projectomandacaru.xls2arff.view.utils.TextAreaOutputStream;
 
 import javax.swing.*;
 import java.awt.*;

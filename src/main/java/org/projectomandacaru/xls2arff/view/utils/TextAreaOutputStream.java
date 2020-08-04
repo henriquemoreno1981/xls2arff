@@ -1,4 +1,4 @@
-package org.projectomandacaru.xls2arrf.view.utils;
+package org.projectomandacaru.xls2arff.view.utils;
 
 import javax.swing.*;
 import java.awt.*;

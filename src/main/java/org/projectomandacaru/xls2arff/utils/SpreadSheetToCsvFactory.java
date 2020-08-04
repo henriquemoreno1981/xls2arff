@@ -1,8 +1,8 @@
-package org.projectomandacaru.xls2arrf.utils;
+package org.projectomandacaru.xls2arff.utils;
 
 import org.apache.commons.io.FilenameUtils;
-import org.projectomandacaru.xls2arrf.model.SpreadSheetToCsv;
-import org.projectomandacaru.xls2arrf.model.XslToCsv;
+import org.projectomandacaru.xls2arff.model.SpreadSheetToCsv;
+import org.projectomandacaru.xls2arff.model.XslToCsv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

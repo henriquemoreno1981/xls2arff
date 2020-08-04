@@ -1,2 +1,2 @@
 # xls2arff
-Convert clusters in spreasdsheet to ARRF
+Convert clusters in spreasdsheet to ARFF

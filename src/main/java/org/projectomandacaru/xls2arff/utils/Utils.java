@@ -1,4 +1,4 @@
-package org.projectomandacaru.xls2arrf.utils;
+package org.projectomandacaru.xls2arff.utils;
 
 import java.io.File;
 import java.io.IOException;

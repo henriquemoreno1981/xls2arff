@@ -1,4 +1,4 @@
-package org.projectomandacaru.xls2arrf.model;
+package org.projectomandacaru.xls2arff.model;
 
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
