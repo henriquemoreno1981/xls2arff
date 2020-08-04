@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Utils {
     public static String getPath(File file) throws IOException {
         if (file.isFile()) {
-            String absolutePath = "";
+            String absolutePath;
             if (file.getParentFile() == null) {
                 absolutePath = getAbsolutePath(file.getAbsolutePath(), File.separatorChar);
             } else {
